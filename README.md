@@ -1,5 +1,7 @@
 # Machine Mind
 
+[![Made with pollinations.ai](https://raw.githubusercontent.com/pollinations/pollinations/main/packages/ui/src/brand/badge-made-with.svg)](https://pollinations.ai/?ref=badge)
+
 A fake retro terminal where a Pollinations model plays the machine.
 
 Quest: pollinations/pollinations #19179, "An app or game where a model plays a machine" (10 Pollen, best submission wins).
