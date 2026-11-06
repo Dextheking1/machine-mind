@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Machine Mind - a model plays a machine</title>
+<meta name="description" content="A fake retro terminal where a Pollinations model plays the machine. It keeps a real filesystem and state, and there are quests inside. Bring your own Pollen.">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header class="topbar">
+  <div class="brand">
+    <div class="brand-mark" aria-hidden="true">M7</div>
+    <div>
+      <h1>Machine Mind</h1>
+      <p class="tagline">A model plays a machine. Quest #19179.</p>
+    </div>
+  </div>
+  <div class="topbar-status">
+    <span id="modeBadge" class="badge badge-demo">Demo mode - canned session</span>
+    <span id="keyStatus" class="key-status">No key set</span>
+  </div>
+</header>
+
+<main class="layout">
+  <section class="terminal-panel" aria-label="Terminal">
+    <div id="demoBanner" class="demo-banner">
+      Demo mode: no key set, so the machine runs a small canned session locally. Add a key and a real Pollinations model plays the full machine.
+    </div>
+    <div id="screen" class="screen" aria-live="polite"></div>
+    <form id="commandForm" class="command-form">
+      <label class="prompt-label" for="commandInput"><span id="promptText">operator@MIND-7:~$</span></label>
+      <input id="commandInput" type="text" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="type a command, try help" aria-label="Command">
+      <button id="sendBtn" type="submit" class="primary">Run</button>
+    </form>
+    <p class="hint">Local commands: <code>clear</code> wipes the screen, <code>reset</code> reboots the machine to a fresh state. Everything else goes to the machine. Up arrow recalls the last command.</p>
+  </section>
+
+  <aside class="side-panel" aria-label="Machine and connection">
+    <section class="panel">
+      <h2>1. Your Pollen key</h2>
+      <p class="hint">
+        Bring your own Pollen. Paste a Pollinations secret key (sk_...) below.
+        The key is stored only in this browser, in localStorage, and requests
+        go only to gen.pollinations.ai. No key? The terminal still runs in
+        demo mode with a clearly labelled canned session.
+      </p>
+      <label class="field-label" for="keyInput">Pollinations API key</label>
+      <div class="key-row">
+        <input id="keyInput" type="password" autocomplete="off" spellcheck="false" placeholder="sk_...">
+        <button id="validateKeyBtn" type="button">Validate key</button>
+        <button id="clearKeyBtn" type="button" class="ghost">Clear</button>
+      </div>
+      <p id="keyMessage" class="key-message" role="status"></p>
+      <p class="hint">Get a key at enter.pollinations.ai. One command is one small chat call.</p>
+
+      <label class="field-label" for="modelSelect">Model playing the machine</label>
+      <select id="modelSelect"></select>
+      <label class="field-label" for="customModel">Custom model id (optional, wins over the list)</label>
+      <input id="customModel" type="text" autocomplete="off" spellcheck="false" placeholder="e.g. openai/gpt-5.4-nano">
+    </section>
+
+    <section class="panel">
+      <h2>2. Machine state</h2>
+      <p class="state-line">cwd <code id="stateCwd">/home/operator</code> · tick <code id="stateTick">0</code></p>
+      <h3>Quests inside the machine</h3>
+      <ul id="questList" class="quest-list"></ul>
+      <div id="winBanner" class="win-banner" hidden>All quests done. The core is awake and the machine is yours.</div>
+      <h3>Filesystem</h3>
+      <pre id="treeView" class="tree-view"></pre>
+      <div class="controls">
+        <button id="resetBtn" type="button" class="ghost">Reboot machine (reset state)</button>
+      </div>
+      <p class="hint">
+        The app tracks this state for real. Each turn the whole state goes
+        into the prompt, the model answers with JSON, and the app validates
+        the state patch before applying it. A bad patch changes nothing.
+      </p>
+    </section>
+  </aside>
+</main>
+
+<footer class="footer">
+  <p>
+    Machine Mind runs fully in your browser. The model plays through
+    gen.pollinations.ai with your own key and your own Pollen.
+    Source and quest notes: see README.md in this project.
+    <a href="https://pollinations.ai">Made with pollinations.ai</a>
+  </p>
+</footer>
+
+<script src="core.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
