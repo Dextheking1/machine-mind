@@ -1,0 +1,1 @@
+{"description":"A fake retro terminal where a Pollinations model plays the machine. Quest #19179.","name":"machine-mind","private":true,"scripts":{"test":"node --test tests/*.test.js"},"version":"1.0.0"}
